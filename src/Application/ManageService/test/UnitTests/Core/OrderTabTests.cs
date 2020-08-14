@@ -8,17 +8,6 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Core
 {
     public class OrderTabTests
     {
-        private IIdGenerator _idGenerator;
-        
-        public OrderTabTests()
-        {
-            var idGeneratorMock = new Mock<IIdGenerator>();
-            idGeneratorMock
-                .Setup(m => m.Generate())
-                .Returns(10);
-            _idGenerator = idGeneratorMock.Object;
-        }
-        
         [Fact]
         public void Open_A_New_OrderTab()
         {
@@ -27,7 +16,7 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Core
             const int tableNumber = 1;
 
             //Action
-            var orderTab = new OrderTab(id, tableNumber, _idGenerator);
+            var orderTab = new OrderTab(id, tableNumber);
             
             //Assert
             Assert.NotNull(orderTab);
@@ -43,11 +32,11 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Core
             const int tableNumber = 1;
             var orders = new List<Order>
             {
-                new Order(1, 1, "Teste", "Testando", OrderStatus.InPreparation)
+                new Order(1, 1, "Teste", "Testando", id, OrderStatus.InPreparation)
             };
 
             //Action
-            var orderTab = new OrderTab(id, tableNumber, orders, _idGenerator);
+            var orderTab = new OrderTab(id, tableNumber, orders);
             
             //Assert
             Assert.NotNull(orderTab);
@@ -62,10 +51,11 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Core
             //Arrange
             const long id = 1;
             const int tableNumber = 1;
-            var orderTab = new OrderTab(id, tableNumber, _idGenerator);
+            var orderTab = new OrderTab(id, tableNumber);
 
             //Action
-            orderTab.AddOrder(1, "Teste", "Testando");
+            var order = new Order(1, 1, "Teste", "Teste", id, OrderStatus.AwaitingPreparation);
+            orderTab.AddOrder(order);
             
             //Assert
             Assert.Single(orderTab.Orders);
@@ -80,9 +70,9 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Core
             
             var orders = new List<Order>
             {
-                new Order(1, 1, "Test", "Testando", OrderStatus.AwaitingPreparation)
+                new Order(1, 1, "Test", "Testando", id, OrderStatus.AwaitingPreparation)
             };
-            var orderTab = new OrderTab(id, tableNumber, orders, _idGenerator);
+            var orderTab = new OrderTab(id, tableNumber, orders);
 
             //Action
             var result = orderTab.CancelOrder(1);
@@ -100,9 +90,9 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Core
             
             var orders = new List<Order>
             {
-                new Order(1, 1, "Test", "Testando", OrderStatus.InPreparation)
+                new Order(1, 1, "Test", "Testando", id, OrderStatus.InPreparation)
             };
-            var orderTab = new OrderTab(id, tableNumber, orders, _idGenerator);
+            var orderTab = new OrderTab(id, tableNumber, orders);
 
             //Action
             var result = orderTab.CancelOrder(1);
@@ -120,9 +110,9 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Core
             
             var orders = new List<Order>
             {
-                new Order(1, 1, "Test", "Testando", OrderStatus.Canceled)
+                new Order(1, 1, "Test", "Testando", id, OrderStatus.Canceled)
             };
-            var orderTab = new OrderTab(id, tableNumber, orders, _idGenerator);
+            var orderTab = new OrderTab(id, tableNumber, orders);
             
             //Action
             var result = orderTab.TryClose();
@@ -140,7 +130,7 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Core
             const int tableNumber = 1;
 
             var orders = new List<Order>();
-            var orderTab = new OrderTab(id, tableNumber, orders, _idGenerator);
+            var orderTab = new OrderTab(id, tableNumber, orders);
             
             //Action
             var result = orderTab.TryClose();
@@ -159,9 +149,9 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Core
 
             var orders = new List<Order>
             {
-                new Order(1, 1, "Test", "Testando", OrderStatus.InPreparation)
+                new Order(1, 1, "Test", "Testando", id, OrderStatus.InPreparation)
             };
-            var orderTab = new OrderTab(id, tableNumber, orders, _idGenerator);
+            var orderTab = new OrderTab(id, tableNumber, orders);
             
             //Action
             var result = orderTab.TryClose();

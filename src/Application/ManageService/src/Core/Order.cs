@@ -1,12 +1,15 @@
+using System.Collections.Generic;
+
 namespace FavoDeMel.Application.ManageService.Core
 {
     public class Order
     {
         public long Id { get; private set; }
-        public int Index { get; private set; }
+        public int Index { get; protected internal set; }
         public string Name { get; private set; }
         public string Description { get; private set; }
         public OrderStatus Status { get; private set; }
+        public long OrderTabId { get; protected internal set; }
 
         protected internal Order(long id, int index, string name, string description)
         {
@@ -17,13 +20,14 @@ namespace FavoDeMel.Application.ManageService.Core
             Status = OrderStatus.AwaitingPreparation;
         }
         
-        public Order(long id, int index, string name, string description, OrderStatus status)
+        public Order(long id, int index, string name, string description, long orderTabId, OrderStatus status)
         {
             Id = id;
             Index = index;
             Name = name;
             Description = description;
             Status = status;
+            OrderTabId = orderTabId;
         }
 
         private bool UpdateStatus(OrderStatus expected, OrderStatus newStatus)
