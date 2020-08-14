@@ -15,7 +15,7 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Core
             const string description = "Testando order";
             const OrderStatus status = OrderStatus.AwaitingPreparation;
             
-            var order = new Order(id, index, name, description, status);
+            var order = new Order(id, index, name, description, 1, status);
             
             //Action
             var result = order.ToCancel();
@@ -35,7 +35,7 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Core
             const string description = "Testando order";
             const OrderStatus status = OrderStatus.AwaitingPreparation;
             
-            var order = new Order(id, index, name, description, status);
+            var order = new Order(id, index, name, description, 1, status);
             
             //Action
             var result = order.ToInPreparation();
@@ -55,7 +55,7 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Core
             const string description = "Testando order";
             const OrderStatus status = OrderStatus.InPreparation;
             
-            var order = new Order(id, index, name, description, status);
+            var order = new Order(id, index, name, description, 1, status);
             
             //Action
             var result = order.ToDone();
@@ -75,7 +75,7 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Core
             const string description = "Testando order";
             const OrderStatus status = OrderStatus.Done;
             
-            var order = new Order(id, index, name, description, status);
+            var order = new Order(id, index, name, description, 1, status);
             
             //Action
             var result = order.ToDelivery();
@@ -98,7 +98,7 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Core
             const string name = "Teste";
             const string description = "Testando order";
             
-            var order = new Order(id, index, name, description, status);
+            var order = new Order(id, index, name, description, 1, status);
             
             //Action
             var result = order.ToCancel();
@@ -121,7 +121,7 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Core
             const string name = "Teste";
             const string description = "Testando order";
             
-            var order = new Order(id, index, name, description, status);
+            var order = new Order(id, index, name, description, 1, status);
             
             //Action
             var result = order.ToInPreparation();
@@ -144,7 +144,7 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Core
             const string name = "Teste";
             const string description = "Testando order";
             
-            var order = new Order(id, index, name, description, status);
+            var order = new Order(id, index, name, description, 1, status);
             
             //Action
             var result = order.ToDone();
@@ -167,7 +167,7 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Core
             const string name = "Teste";
             const string description = "Testando order";
             
-            var order = new Order(id, index, name, description, status);
+            var order = new Order(id, index, name, description, 1, status);
             
             //Action
             var result = order.ToDelivery();

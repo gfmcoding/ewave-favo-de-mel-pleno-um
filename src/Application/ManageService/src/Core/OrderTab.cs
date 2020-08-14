@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using FavoDeMel.Infrastructure.Common.IdGenerator;
 
 namespace FavoDeMel.Application.ManageService.Core
 {
@@ -11,30 +10,25 @@ namespace FavoDeMel.Application.ManageService.Core
         public bool IsClosed { get; private set; }
         public List<Order> Orders { get; private set; }
 
-        private readonly IIdGenerator _idGenerator;
-        
-        public OrderTab(long id, int tableNumber, IIdGenerator idGenerator)
+        public OrderTab(long id, int tableNumber)
         {
             Id = id;
             TableNumber = tableNumber;
             Orders = new List<Order>();
-            _idGenerator = idGenerator;
         }
         
-        public OrderTab(long id, int tableNumber, List<Order> orders, IIdGenerator idGenerator)
+        public OrderTab(long id, int tableNumber, List<Order> orders)
         {
             Id = id;
             TableNumber = tableNumber;
             Orders = orders ?? new List<Order>();
-            _idGenerator = idGenerator;
         }
 
-        public void AddOrder(int index, string name, string description)
+        public void AddOrder(Order order)
         {
-            var orderId = _idGenerator.Generate();
-            var order = new Order(orderId, index, name, description);
+            order.OrderTabId = Id;
             Orders.Add(order);
-        }
+        } 
 
         public bool CancelOrder(long orderId)
         {
