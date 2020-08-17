@@ -90,7 +90,7 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Infrastructure
             }
             
             //Action
-            var orderTabOrders = orderRepository.GetOrderTabOrders(1);
+            var orderTabOrders = orderRepository.GetOrderByOrderTabId(1);
             
             //Assert
             Assert.NotNull(orderTabOrders);

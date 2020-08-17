@@ -75,9 +75,10 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Core
             var orderTab = new OrderTab(id, tableNumber, orders);
 
             //Action
-            var result = orderTab.CancelOrder(1);
+            var removedOrder = orderTab.CancelOrder(1);
 
             //Assert
+            Assert.NotNull(removedOrder);
             Assert.Empty(orderTab.Orders);
         }
         
@@ -95,9 +96,10 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Core
             var orderTab = new OrderTab(id, tableNumber, orders);
 
             //Action
-            var result = orderTab.CancelOrder(1);
+            var removedOrder = orderTab.CancelOrder(1);
 
             //Assert
+            Assert.Null(removedOrder);
             Assert.Single(orderTab.Orders);
         }
         

@@ -5,33 +5,33 @@ namespace FavoDeMel.Application.ManageService.Core
 {
     public class OrdersManager
     { 
-        public int Count => OrdersRepository.Count();
+        public int Count => OrdersRepositoryInMemory.Count();
         //private SortedList<int, Order> Orders { get; set; }
-        private IOrderRepository OrdersRepository { get; set; }
+        private IOrderRepositoryInMemory OrdersRepositoryInMemory { get; set; }
         
         private readonly IIdGenerator _idGenerator;
         
-        public OrdersManager(IIdGenerator idGenerator, IOrderRepository ordersRepository)
+        public OrdersManager(IIdGenerator idGenerator, IOrderRepositoryInMemory ordersRepositoryInMemory)
         {
-            OrdersRepository = ordersRepository;
+            OrdersRepositoryInMemory = ordersRepositoryInMemory;
             _idGenerator = idGenerator;
         }
 
         public Order NewOrder(string name, string description)
         {
             var nextId = _idGenerator.Generate();
-            var nextIndex = (OrdersRepository.Count() + 1);
+            var nextIndex = (OrdersRepositoryInMemory.Count() + 1);
             var order = new Order(nextId,  nextIndex, name, description, 1, OrderStatus.AwaitingPreparation);
             
-            OrdersRepository.Add(order);
+            OrdersRepositoryInMemory.Add(order);
             return order;
         }
 
-        public IReadOnlyDictionary<int, Order> GetOrders() => OrdersRepository.GetAll();
+        public IReadOnlyDictionary<int, Order> GetOrders() => OrdersRepositoryInMemory.GetAll();
 
         public bool ReprioritizeOrder(int position, int newPosition)
         {
-            var orders = OrdersRepository.GetAll();
+            var orders = OrdersRepositoryInMemory.GetAll();
             
             var containsPosition = orders.TryGetValue(position, out var orderPosition);
             var containsNewPosition = orders.TryGetValue(newPosition, out var orderNewPosition);
@@ -53,7 +53,7 @@ namespace FavoDeMel.Application.ManageService.Core
         public void Remove(int position)
         {
             const int numberOne = 1;
-            var orders = OrdersRepository.GetAll();
+            var orders = OrdersRepositoryInMemory.GetAll();
             
             orders.Remove(position);
             for (var i = position; (i - numberOne) < orders.Count; i++)
