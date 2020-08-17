@@ -75,7 +75,7 @@ Execute a migração atraves da ferramenta evolve:
 
 Acesse o repositorio do cliente de notificações e siga suas instruções:
 
-[Repositorio](https://github.com/gfmcoding/client-notifications-favo-de-mel)
+[Repositorio](https://github.com/gfmcoding/client-notification-favo-de-mel)
 
 --------
 
