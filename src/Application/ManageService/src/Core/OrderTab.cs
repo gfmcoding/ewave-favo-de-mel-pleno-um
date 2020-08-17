@@ -30,13 +30,14 @@ namespace FavoDeMel.Application.ManageService.Core
             Orders.Add(order);
         } 
 
-        public bool CancelOrder(long orderId)
+        public Order? CancelOrder(long orderId)
         {
             var order = Orders.Find(o => o.Id == orderId);
-            if (!order.ToCancel()) return false;
+            if (order == null) return null;
+            if (!order.ToCancel()) return null;
 
             Orders.Remove(order);
-            return true;
+            return order;
         }
 
         public bool TryClose()

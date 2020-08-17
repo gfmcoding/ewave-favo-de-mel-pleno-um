@@ -23,7 +23,7 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Core
         public void Create_A_New_OrdersManager()
         {
             //Arrange
-            var orderRepositoryMock = new Mock<IOrderRepository>();
+            var orderRepositoryMock = new Mock<IOrderRepositoryInMemory>();
             orderRepositoryMock
                 .Setup(m => m.Count())
                 .Returns(0);
@@ -44,7 +44,7 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Core
         public void New_Order()
         {
             //Arrange
-            var orderRepositoryMock = new Mock<IOrderRepository>();
+            var orderRepositoryMock = new Mock<IOrderRepositoryInMemory>();
             var returnOrder = new Order(1, 1, "Teste", "Testando", 1, OrderStatus.AwaitingPreparation);
             orderRepositoryMock
                 .Setup(m => m.Add(returnOrder));
@@ -73,7 +73,7 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Core
         public void Get_Orders()
         {
             //Arrange
-            var orderRepositoryMock = new Mock<IOrderRepository>();
+            var orderRepositoryMock = new Mock<IOrderRepositoryInMemory>();
             var returnOrder = new Order(1, 1, "Teste", "Testando", 1, OrderStatus.AwaitingPreparation);
             orderRepositoryMock
                 .Setup(m => m.Add(returnOrder));
@@ -107,7 +107,7 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Core
         public void Deprecate_A_Order()
         {
             //Arrange
-            var orderRepositoryMock = new Mock<IOrderRepository>();
+            var orderRepositoryMock = new Mock<IOrderRepositoryInMemory>();
             var returnOrderOne = new Order(1, 1, "Teste1", "Testando1", 1, OrderStatus.AwaitingPreparation);
             var returnOrderTwo = new Order(1, 2, "Teste2", "Testando2", 1, OrderStatus.AwaitingPreparation);
             var returnOrderTree = new Order(1, 3, "Teste3", "Testando3", 1, OrderStatus.AwaitingPreparation);
@@ -151,7 +151,7 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Core
         public void Priorize_A_Order()
         {
             //Arrange
-            var orderRepositoryMock = new Mock<IOrderRepository>();
+            var orderRepositoryMock = new Mock<IOrderRepositoryInMemory>();
             var returnOrderOne = new Order(1, 3, "Teste3", "Testando3", 1, OrderStatus.AwaitingPreparation);
             var returnOrderTwo = new Order(1,2, "Teste2", "Testando2", 1, OrderStatus.AwaitingPreparation);
             var returnOrderTree = new Order(1, 1, "Teste1", "Testando1", 1, OrderStatus.AwaitingPreparation);
@@ -195,7 +195,7 @@ namespace FavoDeMel.Application.ManageService.UnitTests.Core
         public void Remove_A_Order_By_Position()
         {
             //Arrange
-            var orderRepositoryMock = new Mock<IOrderRepository>();
+            var orderRepositoryMock = new Mock<IOrderRepositoryInMemory>();
             var returnOrderOne = new Order(1, 1, "Teste1", "Testando1", 1, OrderStatus.AwaitingPreparation);
             var returnOrderTwo = new Order(2, 2, "Teste2", "Testando2", 1, OrderStatus.AwaitingPreparation);
             var returnOrderTree = new Order(3, 3, "Teste3", "Testando3", 1, OrderStatus.AwaitingPreparation);
